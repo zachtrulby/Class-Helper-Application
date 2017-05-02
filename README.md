@@ -4,10 +4,10 @@ Class Helper application source code for Software Engineering class for Dr. Andr
 This file's intended purpose should serve as a general description of the application currently being implemented by team One Bit Wonders.
 
 Authors Contributions include:
-Em Tizard (Backend Implementation)
-Christos Grigorian (Frontend Markup Implementation)
-Ben Peters (Frontend Markup Design & Implementation and Documentation)
-Zachary Trulby-Wright (API research and integration, Frontend Markup Design & Implementation)
+Em Tizard (Backend Implementation),
+Christos Grigorian (Frontend Markup Implementation),
+Ben Peters (Frontend Markup Design & Implementation and Documentation),
+Zachary Trulby-Wright (API research and integration, Frontend Markup Design & Implementation).
 
 Built Using:
 - Django Web Framework v. 1.9.13
