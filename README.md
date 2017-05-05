@@ -6,7 +6,7 @@ This file's intended purpose should serve as a general description of the applic
 Authors Contributions include:
 Em Tizard (Backend Implementation),
 Christos Grigorian (Frontend Markup Implementation),
-Ben Peters (Frontend Markup Design & Implementation and Documentation),
+Ben Peters (Backend Implementation, Frontend Markup Design & Implementation and Documentation),
 Zachary Trulby-Wright (API research and integration, Frontend Markup Design & Implementation).
 
 Built Using:
