@@ -153,6 +153,8 @@ def addattendance(request, student_id, course_id):
         form = AttendanceForm(request.POST)
         if form.is_valid():
             attendance = form.save(commit=True)
+            attendance.roster = roster
+            attendance.save()
             return HttpResponseRedirect('/CHproto/%i/roster/' % course.id)
     else:
         form = AttendanceForm()
