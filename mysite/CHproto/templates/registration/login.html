@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <title>Class Helper - Login</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="icon" href="#">
+  <style type="text/css">
+    h1 {
+      font-family: "Copperplate Gothic Light";
+	    font-size: 80px;
+	    font-style: normal;
+	    font-variant: normal;
+	    font-weight: 1250;
+	    line-height: 36.4px;
+      color: white;
+      text-align: center;
+      /*text-transform: uppercase; */
+    }
+    h2 {
+      font-family: "Copperplate Gothic Light";
+	    font-size: 30px;
+	    font-style: normal;
+	    font-variant: normal;
+	    font-weight: 1250;
+	    line-height: 36.4px;
+      color: white;
+      text-align: center;
+      /*text-transform: uppercase; */
+    }
+    hr {
+      display: block;
+      height: 2px;
+      border: 0;
+      border-top: 2px solid #fff;
+      margin: 1em 0;
+      padding: 0;
+      width: 25% auto;
+
+    }
+
+    .form-container {
+      align-content: center;
+    }
+    ul {
+      font-family: "Copperplate Gothic Light";
+	    font-size: 20px;
+	    font-style: normal;
+	    font-variant: normal;
+	    font-weight: 1250;
+      color: white;
+      text-align: center;
+    }
+    .register {
+      height: 50px;
+      width: 200px;
+    }
+  </style>
+  <script src="https://code.jquery.com/jquery-1.10.2.js"></script>
+</head>
+<body bgcolor="#384130">
+
+
+  <div class="container">
+    <h1>Class Helper Login</h1>
+  <div class="form-container">
+
+{% block content %}
+
+{% if form.errors %}
+<p>Your username and password didn't match. Please try again.</p>
+{% endif %}
+
+{% if next %}
+    {% if user.is_authenticated %}
+    <p>Your account doesn't have access to this page. To proceed,
+    please login with an account that has access.</p>
+    {% else %}
+    <p>Please login to see this page.</p>
+    {% endif %}
+{% endif %}
+
+
+<form method="post" action="{% url 'login' %}">
+{% csrf_token %}
+<table>
+<tr>
+    <td>{{ form.username.label_tag }}</td>
+    <td>{{ form.username }}</td>
+</tr>
+<tr>
+    <td>{{ form.password.label_tag }}</td>
+    <td>{{ form.password }}</td>
+</tr>
+</table>
+
+<input type="submit" value="login" />
+<input type="hidden" name="next" value="{{ next }}" />
+</form>
+
+
+
+<a href="/CHproto/register"><input type="submit" value="register"></a>
+
+{# Assumes you setup the password_reset view in your URLconf #}
+<p><a href="{% url 'password_reset' %}">Lost password?</a></p>
+
+{% endblock %}
+
+    </div>
+  </div>
+
+  <div>
+    <form action='posts.html'>
+    {% load static %}
+    <input type="image" src="{% static 'posts/help_button.png' %}" alt="Help"
+    height="45" width="200">
+    </form>
+  </div>
+
+</body>
+</html>

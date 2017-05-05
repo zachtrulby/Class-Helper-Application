@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <title>PROTOTYPE</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="icon" href="#">
+  <script src="https://code.jquery.com/jquery-1.10.2.js"></script>
+  <style type="text/css">
+
+    table {
+      border: 3px solid black;
+      border-collapse: collapse;
+    }
+    th, td {
+      border: 1px solid black;
+      width: auto;
+      background-color: white;
+      text-align: center;
+      border-collapse: collapse;
+      padding: 7.1px;
+    }
+    h1 {
+      font-family: "Copperplate Gothic Light";
+      font-size: 46px;
+      font-style: normal;
+      font-variant: normal;
+      font-weight: 1250;
+      line-height: 36.4px;
+      color: white;
+      text-align: center;
+      /*text-transform: uppercase; */
+    }
+    h2 {
+      font-family: "Copperplate Gothic Light";
+      font-size: 24px;
+      font-style: normal;
+      font-variant: normal;
+      font-weight: 1150;
+      line-height: 24px;
+      color: white;
+      text-align: left;
+      /*text-transform: uppercase; */
+    }
+    hr {
+      display: block;
+      height: 2px;
+      border: 0;
+      border-top: 2px solid #fff;
+      margin: 1em 0;
+      padding: 0;
+      width: 25% auto;
+
+    }
+    .container {
+      float: none;
+      clear: left;
+      display: block;
+      background: #869375;
+      padding: 30px;
+      margin: 25px;
+      white-space: nowrap;
+      height: auto;
+      width: auto;
+    }
+    .course-container {
+      padding: 5px;
+      float: left;
+      clear: left;
+      display: inline-block;
+      background: #4b5143;
+      white-space: nowrap;
+      width: 100%;
+      height: auto;
+    }
+    #add_course_button {
+      padding: 5px;
+      display: inline-block;
+    }
+    .form-container {
+      align-content: center;
+    }
+    ul {
+      font-family: "Copperplate Gothic Light";
+      font-size: 20px;
+      font-style: normal;
+      font-variant: normal;
+      font-weight: 1250;
+      color: white;
+      text-align: center;
+    }
+    .register {
+      height: 50px;
+      width: 200px;
+    }
+  </style>
+</head>
+
+<body bgcolor="#384130">
+
+<div class="back">
+{% load static %}
+<a href="/CHproto/profile"><input type="image" src="{% static 'posts/back_button.png' %}" alt="Brings
+the user to previous page" style="float: left" height="90" width="200"></a>
+</div>
+
+<div class="logout">
+{% load static %}
+<center><a><input type="image" src="{% static 'posts/logout.jpg' %}" alt=
+  "Logs the user out" style="float: right" height="70" width=
+  "160"></a></center>
+</div>
+
+<div class="home">
+  {% load static %}
+  <center><a href = "/CHproto/profile"><input type="image" src="{% static 'posts/home_button.png' %}"
+    alt="Brings the user to the homepage" stlyle="float: right"
+    height="100" width="120"/></a></center>
+</div>
+
+<div class="container">
+
+<h1>Course roster for {{ course.name }}</h1>
+
+{% if students %}
+    <table>
+      <tr>
+        <th>Last Name</th>
+        <th>First Name</th>
+        <th>Student ID</th>
+        <th>Year of Graduation</th>
+        <th>Major</th>
+        <th>Email</th>
+        <th></th>
+        <th></th>
+        <th></th>
+      </tr>
+    {% for student in students %}
+      <tr>
+        <td>{{ student.last_name }}</td>
+        <td>{{ student.first_name }}</td>
+        <td>{{ student.student_id_num }}</td>
+        <td>{{ student.grad_year }}</td>
+        <td>{{ student.major }}</td>
+        <td>{{ student.email }}</td>
+
+        <td><a href="/CHproto/{{student.id}}/{{course.id}}/addattendance"><button class="att">ADD ATTENDANCE for {{student.first_name}}</button></a></td>
+
+        <td><a href="/CHproto/{{student.id}}/{{course.id}}/editstudent/"><button class="editbtn">edit {{student.first_name}}</button></a></td>
+        <td><a href="/CHproto/{{student.id}}/{{course.id}}/removefromroster"><button class="removebtn">remove {{student.first_name}}</button></a></td>
+        <td><a href="/CHproto/{{course.id}}/{{month_number}}/graphattendancebymonth"><button class="graphbtn">graph by week {{roster_entries}} {{month_number}} {{week_number}}</button></a></td>
+        <td><a href="/CHproto/{{course.id}}/{{month_number}}/graphattendancebymonth"><button class="graphbtn">graph by month {{roster_entries}} {{month_number}}</button></a></td>
+      </tr>
+    {% endfor %}
+    </table>
+  {% endif %}
+
+<a href="newstudent/"><input type="submit" value="ADD NEW STUDENT"></input></a>
+
+</div>
+
+<div>
+<form action='posts.html'>
+{% load static %}
+<input type="image" src="{% static 'posts/help_button.png' %}" alt="Submit"
+height="45" width="200">
+</form>
+</div>
+
+</body>
+</html>
