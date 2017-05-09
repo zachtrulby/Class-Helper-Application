@@ -170,6 +170,165 @@ the user to previous page" style="float: left" height="90" width="200"></a>
     </table>
 
 <br><br>
+  
+  <ul>Month 1</ul>
+        <table>
+      <tr>
+        <th>Student</th>
+        <th>Week 1 total</th>
+        <th>Week 2 total</th>
+        <th>Week 3 total</th>
+        <th>Week 4 total</th>
+        <th></th>
+      </tr>
+
+      <tr>
+    {% for student, totals in week_totals.items %}
+        <td>{{ student.last_name }}, {{ student.first_name}}</td>
+        <td>
+          {{ totals.0 }}
+        </td>
+        <td>
+          {{ totals.1 }}
+        </td>
+        <td>
+          {{ totals.2 }}
+        </td>
+        <td>
+          {{totals.3}}
+        </td>
+
+        <td>
+          <a href="/CHproto/{{student.id}}/{{course.id}}/addattendance"><input type="submit" value="ADD NEW ATTENDANCE"></input></a>
+        </td>
+
+            </tr>
+    {% endfor %}
+    </table>
+        
+
+<br><br>
+
+<ul>Month 2</ul>
+        <table>
+      <tr>
+        <th>Student</th>
+        <th>Week 5 total</th>
+        <th>Week 6 total</th>
+        <th>Week 7 total</th>
+        <th>Week 8 total</th>
+        <th></th>
+      </tr>
+
+      <tr>
+    {% for student, totals in week_totals.items %}
+        <td>{{ student.last_name }}, {{ student.first_name}}</td>
+        
+        <td>
+          {{ totals.4 }}
+        </td>
+        <td>
+          {{ totals.5 }}
+        </td>
+        <td>
+          {{ totals.6 }}
+        </td>
+        <td>
+          {{totals.7}}
+        </td>
+
+        <td>
+          <a href="/CHproto/{{student.id}}/{{course.id}}/addattendance"><input type="submit" value="ADD NEW ATTENDANCE"></input></a>
+        </td>
+
+            </tr>
+    {% endfor %}
+    </table>
+
+<br><br>
+
+
+<ul>Month 3</ul>
+        <table>
+      <tr>
+        <th>Student</th>
+        <th>Week 9 total</th>
+        <th>Week 10 total</th>
+        <th>Week 11 total</th>
+        <th>Week 12 total</th>
+        <th></th>
+      </tr>
+
+      <tr>
+    {% for student, totals in week_totals.items %}
+        <td>{{ student.last_name }}, {{ student.first_name}}</td>
+
+        <td>
+          {{ totals.8 }}
+        </td>
+        <td>
+          {{ totals.9 }}
+        </td>
+        <td>
+          {{ totals.10 }}
+        </td>
+        <td>
+          {{totals.11}}
+        </td>
+
+        <td>
+          <a href="/CHproto/{{student.id}}/{{course.id}}/addattendance"><input type="submit" value="ADD NEW ATTENDANCE"></input></a>
+        </td>
+
+            </tr>
+    {% endfor %}
+    </table>
+
+<br><br>
+
+<ul>Month 4</ul>
+        <table>
+      <tr>
+        <th>Student</th>
+        <th>Week 13 total</th>
+        <th>Week 14 total</th>
+        <th>Week 15 total</th>
+        <th>Week 16 total</th>
+        <th></th>
+      </tr>
+
+      <tr>
+    {% for student, totals in week_totals.items %}
+        <td>{{ student.last_name }}, {{ student.first_name}}</td>
+        <td>
+          {{ totals.12 }}
+        </td>
+        <td>
+          {{ totals.13 }}
+        </td>
+        <td>
+          {{ totals.14 }}
+        </td>
+        <td>
+          {{totals.15}}
+        </td>
+
+        <td>
+          <a href="/CHproto/{{student.id}}/{{course.id}}/addattendance"><input type="submit" value="ADD NEW ATTENDANCE"></input></a>
+        </td>
+
+        <!--
+        <td><a href="/CHproto/{{student.id}}/{{course.id}}/editstudent/"><button class="editbtn">edit {{student.first_name}}</button></a></td>
+        <td><a href="/CHproto/{{student.id}}/{{course.id}}/removefromroster"><button class="removebtn">remove {{student.first_name}}</button></a></td>
+        -->
+
+        
+
+    </tr>
+    {% endfor %}
+    </table>
+
+<br><br>
 
 </div>
 
