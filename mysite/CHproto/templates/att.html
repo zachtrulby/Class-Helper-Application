@@ -87,7 +87,7 @@
       font-variant: normal;
       font-weight: 1250;
       color: white;
-      text-align: center;
+      text-align: left;
     }
     .register {
       height: 50px;
@@ -131,7 +131,7 @@ the user to previous page" style="float: left" height="90" width="200"></a>
         <th>Month 4 total</th>
         <th>Overall</th>
         <th></th>
-        <th></th>
+
       </tr>
 
 
@@ -139,25 +139,24 @@ the user to previous page" style="float: left" height="90" width="200"></a>
     {% for student, totals in all_totals.items %}
         <td>{{ student.last_name }}, {{ student.first_name}}</td>
         <td>
-          {{ totals.0 }}
+          <a href="/CHproto/{{student.id}}/{{course.id}}/1/graphattendancebymonth"><input type="submit" value="{{ totals.0 }}" title="Graph by Month">
         </td>
         <td>
-          {{ totals.1 }}
+          <a href="/CHproto/{{student.id}}/{{course.id}}/2/graphattendancebymonth"><input type="submit" value="{{ totals.1 }}" title="Graph by Month">
         </td>
         <td>
-          {{ totals.2 }}
+          <a href="/CHproto/{{student.id}}/{{course.id}}/3/graphattendancebymonth"><input type="submit" value="{{ totals.2 }}" title="Graph by Month">
         </td>
         <td>
-          {{totals.3}}
+          <a href="/CHproto/{{student.id}}/{{course.id}}/4/graphattendancebymonth"><input type="submit" value="{{ totals.3 }}" title="Graph by Month">
         </td>
         <td>
-          {{ totals.4 }}
+          <a href="/CHproto/{{student.id}}/{{course.id}}/graphattendanceoverall"><input type="submit" value="{{ totals.4 }}" title="Graph by Semester">
         </td>
+
 
         <td>
           <a href="/CHproto/{{student.id}}/{{course.id}}/addattendance"><input type="submit" value="ADD NEW ATTENDANCE"></input></a>
-          <td><a href="/CHproto/{{course.id}}/{{month_number}}/graphattendancebyweek"><button class="graphbtn">graph by week</button></a></td>
-          <td><a href="/CHproto/{{course.id}}/{{month_number}}/graphattendancebymonth"><button class="graphbtn">graph by month</button></a></td>
         </td>
 
         <!--
@@ -167,11 +166,39 @@ the user to previous page" style="float: left" height="90" width="200"></a>
 
     </tr>
     {% endfor %}
+
+    <tr>
+        <td> 
+          All
+        </td>
+        <td>
+          {{ m_grand_total.0 }}
+          <!--<a href="/CHproto/{{course.id}}/1/graphoverallmonth"><input type="submit" value="{{ m_grand_total.0 }}" title="Graph by Month">-->
+        </td>
+        <td>
+          {{ m_grand_total.1 }}
+          <!--<a href="/CHproto/{{course.id}}/2/graphoverallmonth"><input type="submit" value="{{ m_grand_total.1 }}" title="Graph by Month">-->
+        </td>
+        <td>
+          {{ m_grand_total.2 }}
+          <!--<a href="/CHproto/{{course.id}}/3/graphoverallmonth"><input type="submit" value="{{ m_grand_total.2 }}" title="Graph by Month">-->
+        </td>
+        <td>
+          {{ m_grand_total.3 }}
+          <!--<a href="/CHproto/{{course.id}}/4/graphoverallmonth"><input type="submit" value="{{ m_grand_total.3 }}" title="Graph by Month">-->
+        </td>
+        <td>
+          {{ grand_total.0 }}
+          <!--<a href="/CHproto/{{student.id}}/{{course.id}}/graphattendanceoverall"><input type="submit" value="{{ totals.4 }}" title="Graph by Semester">-->
+        </td>
+        <td></td>
+    </tr>
+
     </table>
 
 <br><br>
-  
-  <ul>Month 1</ul>
+
+<ul>Month 1</ul>
         <table>
       <tr>
         <th>Student</th>
@@ -186,16 +213,16 @@ the user to previous page" style="float: left" height="90" width="200"></a>
     {% for student, totals in week_totals.items %}
         <td>{{ student.last_name }}, {{ student.first_name}}</td>
         <td>
-          {{ totals.0 }}
+          <a href="/CHproto/{{student.id}}/{{course.id}}/1/graphattendancebyweek"><input type="submit" value="{{ totals.0 }}" title="Graph by Week">
         </td>
         <td>
-          {{ totals.1 }}
+          <a href="/CHproto/{{student.id}}/{{course.id}}/2/graphattendancebyweek"><input type="submit" value="{{ totals.1 }}" title="Graph by Week">
         </td>
         <td>
-          {{ totals.2 }}
+          <a href="/CHproto/{{student.id}}/{{course.id}}/3/graphattendancebyweek"><input type="submit" value="{{ totals.2 }}" title="Graph by Week">
         </td>
         <td>
-          {{totals.3}}
+          <a href="/CHproto/{{student.id}}/{{course.id}}/4/graphattendancebyweek"><input type="submit" value="{{ totals.3 }}" title="Graph by Week">
         </td>
 
         <td>
@@ -204,6 +231,26 @@ the user to previous page" style="float: left" height="90" width="200"></a>
 
             </tr>
     {% endfor %}
+
+        <tr>
+        <td> 
+          All
+        </td>
+        <td>
+          {{ w_grand_total.0 }}
+        </td>
+        <td>
+          {{ w_grand_total.1 }}
+        </td>
+        <td>
+          {{ w_grand_total.2 }}
+        </td>
+        <td>
+          {{ w_grand_total.3 }}
+        </td>
+        <td></td>
+    </tr>
+
     </table>
         
 
@@ -225,16 +272,16 @@ the user to previous page" style="float: left" height="90" width="200"></a>
         <td>{{ student.last_name }}, {{ student.first_name}}</td>
         
         <td>
-          {{ totals.4 }}
+          <a href="/CHproto/{{student.id}}/{{course.id}}/5/graphattendancebyweek"><input type="submit" value="{{ totals.4 }}" title="Graph by Week">
         </td>
         <td>
-          {{ totals.5 }}
+          <a href="/CHproto/{{student.id}}/{{course.id}}/6/graphattendancebyweek"><input type="submit" value="{{ totals.5 }}" title="Graph by Week">
         </td>
         <td>
-          {{ totals.6 }}
+          <a href="/CHproto/{{student.id}}/{{course.id}}/7/graphattendancebyweek"><input type="submit" value="{{ totals.6 }}" title="Graph by Week">
         </td>
         <td>
-          {{totals.7}}
+          <a href="/CHproto/{{student.id}}/{{course.id}}/8/graphattendancebyweek"><input type="submit" value="{{ totals.7 }}" title="Graph by Week">
         </td>
 
         <td>
@@ -243,7 +290,25 @@ the user to previous page" style="float: left" height="90" width="200"></a>
 
             </tr>
     {% endfor %}
-    </table>
+            <tr>
+        <td> 
+          All
+        </td>
+        <td>
+          {{ w_grand_total.4 }}
+        </td>
+        <td>
+          {{ w_grand_total.5 }}
+        </td>
+        <td>
+          {{ w_grand_total.6 }}
+        </td>
+        <td>
+          {{ w_grand_total.7 }}
+        </td>
+        <td></td>
+    </tr>
+  </table>
 
 <br><br>
 
@@ -264,16 +329,16 @@ the user to previous page" style="float: left" height="90" width="200"></a>
         <td>{{ student.last_name }}, {{ student.first_name}}</td>
 
         <td>
-          {{ totals.8 }}
+          <a href="/CHproto/{{student.id}}/{{course.id}}/9/graphattendancebyweek"><input type="submit" value="{{ totals.8 }}" title="Graph by Week">
         </td>
         <td>
-          {{ totals.9 }}
+          <a href="/CHproto/{{student.id}}/{{course.id}}/10/graphattendancebyweek"><input type="submit" value="{{ totals.9 }}" title="Graph by Week">
         </td>
         <td>
-          {{ totals.10 }}
+          <a href="/CHproto/{{student.id}}/{{course.id}}/11/graphattendancebyweek"><input type="submit" value="{{ totals.10 }}" title="Graph by Week">
         </td>
         <td>
-          {{totals.11}}
+          <a href="/CHproto/{{student.id}}/{{course.id}}/12/graphattendancebyweek"><input type="submit" value="{{ totals.11 }}" title="Graph by Week">
         </td>
 
         <td>
@@ -282,6 +347,24 @@ the user to previous page" style="float: left" height="90" width="200"></a>
 
             </tr>
     {% endfor %}
+    <tr>
+        <td> 
+          All
+        </td>
+        <td>
+          {{ w_grand_total.8 }}
+        </td>
+        <td>
+          {{ w_grand_total.9 }}
+        </td>
+        <td>
+          {{ w_grand_total.10 }}
+        </td>
+        <td>
+          {{ w_grand_total.11 }}
+        </td>
+        <td></td>
+    </tr>
     </table>
 
 <br><br>
@@ -301,16 +384,16 @@ the user to previous page" style="float: left" height="90" width="200"></a>
     {% for student, totals in week_totals.items %}
         <td>{{ student.last_name }}, {{ student.first_name}}</td>
         <td>
-          {{ totals.12 }}
+          <a href="/CHproto/{{student.id}}/{{course.id}}/13/graphattendancebyweek"><input type="submit" value="{{ totals.12 }}" title="Graph by Week">
         </td>
         <td>
-          {{ totals.13 }}
+          <a href="/CHproto/{{student.id}}/{{course.id}}/14/graphattendancebyweek"><input type="submit" value="{{ totals.13 }}" title="Graph by Week">
         </td>
         <td>
-          {{ totals.14 }}
+          <a href="/CHproto/{{student.id}}/{{course.id}}/15/graphattendancebyweek"><input type="submit" value="{{ totals.14 }}" title="Graph by Week">
         </td>
         <td>
-          {{totals.15}}
+          <a href="/CHproto/{{student.id}}/{{course.id}}/16/graphattendancebyweek"><input type="submit" value="{{ totals.15 }}" title="Graph by Week">
         </td>
 
         <td>
@@ -326,6 +409,24 @@ the user to previous page" style="float: left" height="90" width="200"></a>
 
     </tr>
     {% endfor %}
+            <tr>
+        <td> 
+          All
+        </td>
+        <td>
+          {{ w_grand_total.12 }}
+        </td>
+        <td>
+          {{ w_grand_total.13 }}
+        </td>
+        <td>
+          {{ w_grand_total.14 }}
+        </td>
+        <td>
+          {{ w_grand_total.15 }}
+        </td>
+        <td></td>
+    </tr>
     </table>
 
 <br><br>
