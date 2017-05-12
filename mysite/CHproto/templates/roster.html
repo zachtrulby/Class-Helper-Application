@@ -148,8 +148,6 @@ the user to previous page" style="float: left" height="90" width="200"></a>
 
         <td><a href="/CHproto/{{student.id}}/{{course.id}}/editstudent/"><button class="editbtn">edit {{student.first_name}}</button></a></td>
         <td><a href="/CHproto/{{student.id}}/{{course.id}}/removefromroster"><button class="removebtn">remove {{student.first_name}}</button></a></td>
-        <td><a href="/CHproto/{{course.id}}/{{month_number}}/graphattendancebymonth"><button class="graphbtn">graph by week {{roster_entries}} {{month_number}} {{week_number}}</button></a></td>
-        <td><a href="/CHproto/{{course.id}}/{{month_number}}/graphattendancebymonth"><button class="graphbtn">graph by month {{roster_entries}} {{month_number}}</button></a></td>
       </tr>
     {% endfor %}
     </table>
