@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <title>PROTOTYPE</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="icon" href="#">
+  <style type="text/css">
+    h1 {
+      font-family: "Copperplate Gothic Light";
+	    font-size: 46px;
+	    font-style: normal;
+	    font-variant: normal;
+	    font-weight: 1250;
+	    line-height: 36.4px;
+      color: white;
+      text-align: center;
+      /*text-transform: uppercase; */
+    }
+    h2 {
+      font-family: "Copperplate Gothic Light";
+	    font-size: 30px;
+	    font-style: normal;
+	    font-variant: normal;
+	    font-weight: 1250;
+	    line-height: 36.4px;
+      color: white;
+      text-align: center;
+      /*text-transform: uppercase; */
+    }
+    hr {
+      display: block;
+      height: 2px;
+      border: 0;
+      border-top: 2px solid #fff;
+      margin: 1em 0;
+      padding: 0;
+      width: 25% auto;
+
+    }
+    .container {
+      float: none;
+      clear: left;
+      display: block;
+      background: #869375;
+      padding: 30px;
+      margin: 25px;
+      white-space: nowrap;
+      height: auto;
+      width: auto;
+    }
+    .course-container {
+      padding: 5px;
+      float: left;
+      clear: left;
+      display: inline-block;
+      background: #4b5143;
+      white-space: nowrap;
+      width: 100%;
+      height: auto;
+    }
+    #add_course_button {
+      padding: 5px;
+      display: inline-block;
+    }
+    .form-container {
+      align-content: center;
+    }
+    ul {
+      font-family: "Copperplate Gothic Light";
+	    font-size: 20px;
+	    font-style: normal;
+	    font-variant: normal;
+	    font-weight: 1250;
+      color: white;
+      text-align: center;
+    }
+    .register {
+      height: 50px;
+      width: 200px;
+    }
+  </style>
+  <script src="https://code.jquery.com/jquery-1.10.2.js"></script>
+</head>
+<body bgcolor="#384130">
+
+  <div class="top">
+    {% load static %}
+    <input type="image" onclick="window.history.back()" src="{% static 'posts/back_button.png' %}" alt="Brings
+    the user to previous page" style="float: left" height="90" width="200">
+  </div>
+
+  <br>
+
+  <div class="container">
+    <h1>Registration</h1>
+    <div class="form-container">
+      <form method="post">
+        {% csrf_token %}
+
+        {{form.as_p}}
+
+        <input type="submit" value="register">
+
+      </form>
+
+    </div>
+  </div>
+
+  <div>
+    <form action='posts.html'>
+    {% load static %}
+    <input type="image" src="{% static 'posts/help_button.png' %}" alt="Submit"
+    height="45" width="200">
+    </form>
+  </div>
+
+</body>
+</html>
