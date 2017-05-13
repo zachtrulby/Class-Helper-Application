@@ -1,6 +1,12 @@
-<html>
-  <head>
-    <!--Load the AJAX API-->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <title>Graph</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="icon" href="#">
+   <script src="https://code.jquery.com/jquery-1.10.2.js"></script>
+      <!--Load the AJAX API-->
     <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
     <script type="text/javascript">
 
@@ -19,14 +25,14 @@
         data.addColumn('string', 'Attendance');
         data.addColumn('number', 'Number of Days');
         data.addRows([
-          ['Absent - Excused', 3],
-          ['Absent - Unexcused', 1],
-          ['Tardy', 1],
-          ['Full', 1],
+          ['Absent - Excused', {{ f_a_t.1 }} ],
+          ['Absent - Unexcused',  {{ f_a_t.2 }} ],
+          ['Tardy',  {{ f_a_t.3 }} ],
+          ['Full', {{ f_a_t.0 }} ],
         ]);
 
         // Set chart options
-        var options = {'title':'Weekly Attendance for Week of 4/17/17',
+        var options = {'title':'Attendance for {{ time_period }}',
                        'width':400,
                        'height':300};
 
@@ -37,11 +43,151 @@
         chart.draw(data, options);
       }
     </script>
-  </head>
+  <style type="text/css">
+      h1 {
+      font-family: "Copperplate Gothic Light";
+	    font-size: 46px;
+	    font-style: normal;
+	    font-variant: normal;
+	    font-weight: 1250;
+	    line-height: 36.4px;
+      color: white;
+      text-align: center;
+      /*text-transform: uppercase; */
+    }
+    h2 {
+      font-family: "Copperplate Gothic Light";
+	    font-size: 30px;
+	    font-style: normal;
+	    font-variant: normal;
+	    font-weight: 1250;
+	    line-height: 36.4px;
+      color: white;
+      text-align: center;
+      /*text-transform: uppercase; */
+    }
+  
+    hr {
+      display: block;
+      height: 2px;
+      border: 0;
+      border-top: 2px solid #fff;
+      margin: 1em 0;
+      padding: 0;
+      width: 25% auto;
 
-  <body>
-    <!--Div that will hold the pie chart-->
+    }
+    .container {
+      float: left;
+      clear: left;
+      display: flex;
+      background: #869375;
+      padding: 30px;
+      margin: 25px;
+      white-space: nowrap;
+      height: auto;
+      width: 80%;
+    }
+    .course-container {
+      padding: 5px;
+      float: left;
+      clear: left;
+      display: inline-block;
+      background: #4b5143;
+      white-space: nowrap;
+      width: 100%;
+      height: auto;
+    }
+	
+	  .course-container {
+      padding: 5px;
+      float: left;
+      clear: left;
+      display: inline-block;
+      background: #4b5143;
+      white-space: nowrap;
+      width: 100%;
+      height: auto;
+    }
+	    ul {
+      font-family: "Copperplate Gothic Light";
+	    font-size: 20px;
+	    font-style: normal;
+	    font-variant: normal;
+	    font-weight: 1250;
+      color: white;
+      text-align: center;
+    }
+    .confirm {
+      height: 50px;
+      width: 200px;
+    }
+  </style>
+ 
+</head>
+<body bgcolor="#384130">
+
+<div class="back">
+{% load static %}
+<input type="image" onclick="window.history.back()" src="{% static 'posts/back_button.png' %}" alt="Brings
+the user to previous page" style="float: left" height="90" width="200"></a>
+</div>
+
+<div class="logout">
+{% load static %}
+<center><a><input type="image" src="{% static 'posts/logout.jpg' %}" alt=
+  "Logs the user out" style="float: right" height="70" width=
+  "160"></a></center>
+</div>
+
+<div class="home">
+  {% load static %}
+  <center><a href = "/CHproto/profile"><input type="image" src="{% static 'posts/home_button.png' %}"
+    alt="Brings the user to the homepage" stlyle="float: right"
+    height="100" width="120"/></a></center>
+</div>
+
+  
+  
+  <div class="container">
+
+  
+    <h1>Graph</h1>
+
+
+
+      <!--Div that will hold the pie chart-->
     <div id="chart_div"></div>
     <div id="table_div"></div>
-  </body>
+    <div class="form-container">
+      <form>
+        <ul>{{ course.name }}:<br>
+        <name="coursename"><br></ul>
+        <ul>{{ student.last_name }}, {{ student.first_name}}<br>
+        <name="firstname" + "lastname"></br></ul>
+        <ul>{{ student.email }}<br>
+          <a href="mailto: {{ student.email }}"><input type="submit" value="Email Student">
+        <name="email"></br></ul><br><br>
+		
+		        <button action="submit" href="/home.html">
+          {% load static %}
+          <center><input class="confirm" type="image" src="{% static 'posts/email_button.png' %}"
+            alt="Button to email student" height="100px"></center>
+      </form>
+      </form>
+
+    </div>
+</div>
+
+
+<div>
+<form action='posts.html'>
+{% load static %}
+<input type="image" src="{% static 'posts/help_button.png' %}" alt="Submit"
+height="45" width="200">
+</form>
+</div>
+
+
+</body>
 </html>
