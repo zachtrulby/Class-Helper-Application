@@ -1,7 +1,4 @@
-<!-- Replace the comfirm button with an image of confirm button -->
-<!-- Need to add "edit" icon to initialize the editing for each input -->
 <!-- Need to add student photo icon, change photo button and remove student button -->
-<!-- Confirm button and other image icons need to become functional -->
 <!-- The edit student area should be moved to the middle so that the student photo can be added to the left -->
 
 <!DOCTYPE html>
@@ -12,54 +9,112 @@
 		<meta name="viewport" content="width=device-width, initial-scale=1.0">
 		<link rel="icon" href="#">
 		<style type="text/css">
-			h1 {
-				font-family: "Copperplate Gothic Light";
-				font-size: 46px;
-				font-style: normal;
-				font-variant: normal;
-				font-weight: 1250;
-				line-height: 36.4px;
-				color: white;
-				text-align: center;
-				/*text-transform: uppercase; */
+		#back_button {
+	  		float:left;
+	  		alt: Brings the user back to the previous page
+	  		height: 90px;
+	  		width:200px;
+		}
+		#home_button {
+	  		alt:Submit;
+	  		height:90px;
+	  		width:200px;
+		}
+		#logout_button {
+	  		float:right;
+	  		alt:Submit;
+	  		height:50px;
+	  		width:200px;
+		}
+		#help_button {
+			alt:Submit;
+			height:45px;
+			width:200px;
+		}
+		h1 {
+      		font-family: "Copperplate Gothic Light";
+			font-size: 30px;
+			font-style: normal;
+			font-variant: normal;
+			font-weight: 1250;
+			line-height: 36.4px;
+			color: white;
+			text-align: center;
+			/*text-transform: uppercase; */
+    	}
+		.container {
+			float: left;
+			clear: left;
+			display: flex;
+			background: #869375;
+			padding: 30px;
+			margin: 25px;
+			white-space: nowrap;
+			height: auto;
+			width: 80%;
+		}
+		.submit {
+			height: 50px;
+			width: 150px;
+			float:right;
+		}
+		form {
+        	color: white;
+        	font-size: 25px;
+        	width:50%;
+     	}
+     	form p {
+        	font-size: 20px;
+        }
+        .save_button{
+        	height: 50px;
+	    	width: 200px;
+			color: white;
+			background-color:#384130;
+			font-size:30px;
+    	}
+    	.remove_button {
+        	height: 50px;
+	    	width: 250px;
+			color: white;
+			background-color:#384130;
+			font-size:30px;
+    	}
+    	@media only screen and (max-width: 768px) {
+        	/* For mobile phones: */
+        	h1 {
+          		display: none;
+        	}
+	    	#help_button {
+		  		height: 30px;
+		  		width: 100px;
 			}
-			h2 {
-				font-family: "Copperplate Gothic Light";
-				font-size: 30px;
-				font-style: normal;
-				font-variant: normal;
-				font-weight: 1250;
-				line-height: 36.4px;
-				color: white;
-				text-align: center;
-				/*text-transform: uppercase; */
+			#back_button {
+		  		height: 45px;
+		  		width: 100px;
+		}
+			#logout_button {
+		  		float:right;
+		  		alt:Submit;
+		  		height:25px;
+		  		width:100px;
 			}
-			.container {
-				float: left;
-				clear: left;
-				display: flex;
-				background: #869375;
-				padding: 30px;
-				margin: 25px;
-				white-space: nowrap;
-				height: auto;
-				width: 80%;
+			#home_button {
+		  		alt:Submit;
+		  		height:45px;
+		  		width:100px;
 			}
-			.course-container {
-				padding: 5px;
-				float: left;
-				clear: left;
-				display: inline-block;
-				background: #4b5143;
-				white-space: nowrap;
-				width: 100%;
-				height: auto;
+			.save_button {
+		        height: 25px;
+		        width: 75px;
+		        font-size:15px;
 			}
-			.submit {
-				height: 50px;
-				width: 150px;
-				float:right;
+			.remove_button {
+		        height: 25px;
+		        width: 125px;
+		        font-size:15px;
 			}
+  		}
 		</style>
 		<script src="https://code.jquery.com/jquery-1.10.2.js"></script>
 	</head>
@@ -67,45 +122,38 @@
 
 		<div class="back">
 		{% load static %}
-		<input type="image" onclick="window.history.back()" src="{% static 'posts/back_button.png' %}" alt="Brings
-		the user to previous page" style="float: left" height="90" width="200">
+		<input id="back_button" type="image" onclick="window.history.back()" src="{% static 'posts/back_button.png' %}">
 		</div>
 
 		<div class="logout">
 		{% load static %}
-		<center><a><input type="image" src="{% static 'posts/logout.jpg' %}" alt=
-		  "Logs the user out" style="float: right" height="70" width=
-		  "160"></a></center>
+		<center><a><input id="logout_button" type="image" src="{% static 'posts/logout.jpg' %}" alt=
+		  "Logs the user out"></a></center>
 		</div>
 
 		<div class="home">
 		  {% load static %}
-		  <center><a href = "/CHproto/profile"><input type="image" src="{% static 'posts/home_button.png' %}"
-		    alt="Brings the user to the homepage" stlyle="float: right"
-		    height="100" width="120"/></a></center>
+		  <center><a href = "/CHproto/profile"><input id="home_button" type="image" src="{% static 'posts/home_button.png' %}"
+		    alt="Brings the user to the homepage"/></a></center>
 		</div>
-
-
 
 		{% block content %}
 		<div style="background-color: #889277">
 		<h1>Edit Course</h1>
-		<form method="POST" class="post-form">{% csrf_token %}
+		<center><form method="POST" class="post-form">{% csrf_token %}
 			{{ form.as_p }}
-			<button type="submit" class="save btn btn-default">Save</button>
-		</form>
+			<button type="submit" class="save_button">save</button>
+		</form></center>
 
-		<br><br>
-		<a href="/CHproto/{{ course.id }}/removecourse"><button class="removebtn" onclick="return confirm('Are you sure?')">Remove course</button></a>
-
+		<br>
+		<center><a href="/CHproto/{{ course.id }}/removecourse"><button class="remove_button" onclick="return confirm('Are you sure?')">remove course</button></a></center>
+		<br>
 		</div>
 		{% endblock %}
 
-
-
 		<div>
 			{% load static %}
-			<input type="image" src="{% static 'posts/help_button.png' %}" alt="Submit" height="45" width="200" alt="Brings you to the help page related to the edit student">
+			<input id="help_button" type="image" src="{% static 'posts/help_button.png' %}" alt="Brings you to the help page related to the edit student">
 		</div>
 
 </body>
