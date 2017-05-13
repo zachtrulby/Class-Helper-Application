@@ -1,10 +1,89 @@
+<!-- This page is used for pages that will use the same default setup -->
 <!DOCTYPE html>
-<html>
-    <head>
-        <title>em is so cool</title>
-    </head>
+<html lang="en">
+	<head>
+		<title>Login</title>
+		<!-- Everything inside the block style is CSS (Cascading Style Sheets), which is is computer language responsible
+	   		 for formatting the language. -->
+  		<!-- To find out where the formatting is done, search for the class or id within the tags (class = .)(id = #) -->
+		<meta charset="utf-8"/>
+		{% load staticfiles %}
+		<link rel='stylesheet' href="{% static 'css/bootstrap.min.css' %}" type='text/css'/>
+		<meta name="viewport" content = "width=device-width, initial-scale=1.0">
+		<style type="text/css">
+			{% block style %}
+				<!-- In here, there will be css that will affect the style to all non-default base page stuff -->
+			{% endblock %}
+			html,
+			body {
+				height:50%;
+				width:100%;
+				alt: The display of the page will be set specifically;
+			}
+			#back_button {
+				float:left;
+				alt:Submit;
+				height: 90px;
+				width:200px;
+				alt: The back button will bring the user back to the previous page;
+			}
+			#logout_button {
+				float:right;
+				alt:Submit;
+				height:50px;
+				width:200px;
+				alt: The logout button will bring the user back to the login page;
+			}
+			#home_button {
+				alt:Submit;
+				height:90px;
+				width:200px;
+				alt: The home button will bring the user to the home page;
+			}
+			#help_button {
+				alt:Submit;
+				height:45px;
+				width:200px;
+				alt: The help button will bring the user to the help page which will have needed instructions;
+			}
 
-    <body>
-    {% block content %}{% endblock content %}
-    </body>
+			@media only screen and (max-width: 768px) {
+				/* For mobile phones: */
+				#back_button {
+					width: 150px;
+					alt: the back button is formatted for mobile size;
+				}
+				#logout_button {
+					width: 150px;
+					alt: the logout button is formatted for mobile size;
+				}
+				#home_button {
+					width: 150px;
+					alt: The home button is formatted for mobile size;
+				}
+				#help_button {
+					height: 30px;
+					width: 100px;
+					alt: The help button is formatted for mobile size;
+				}
+			}
+		</style>
+	</head>
+	<body class="body" style="background-color:#384130">
+		<div id="container">
+			<div id="top">
+				{% load static %}
+				<input id="back_button" type="image" src="{% static 'img/back_button.png' %}">
+				<input id="logout_button" type="image" src="{% static 'img/logout_button.png' %}">
+				<center><input id="home_button" type="image" src="{% static 'img/home_button.png' %}"></center>
+			</div>
+			{% block body %}
+				<!-- In here, there will be html code that will display things that is non-default base page stuff -->
+			{% endblock %}
+			<div id="bottom">
+				{% load static %}
+				<input id="help_button" type="image" src="{% static 'posts/help_button.png' %}">
+			</div>
+		</div>
+	</body>
 </html>
