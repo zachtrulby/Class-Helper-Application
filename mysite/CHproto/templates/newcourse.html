@@ -1,10 +1,13 @@
-
+<!-- Once the user decides to add a course, he/she In the add course page, the user will need to define the course name,
+	 how many hours each course takes for each meeting and the total amount of hours per week the course takes.
+	 Once the information has been inserted, the user can press save and the course will be added to the
+	 home page (Course page)
+-->
 <!DOCTYPE html>
 {% load staticfiles %}
 <html>
     <head>
         <title>Add student</title>
-
         <meta charset="utf-8" />
         <title>PROTOTYPE</title>
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -19,64 +22,122 @@
             line-height: 36.4px;
             color: white;
             text-align: center;
-            /*text-transform: uppercase; */
-          }
-          h2 {
-            font-family: "Copperplate Gothic Light";
-            font-size: 30px;
-            font-style: normal;
-            font-variant: normal;
-            font-weight: 1250;
-            line-height: 36.4px;
-            color: white;
-            text-align: center;
+            alt: Giving the title "ADD NEW COURSE" a specific size.;
             /*text-transform: uppercase; */
           }
           .container {
-            float: left;
-            clear: left;
-            display: flex;
             background: #869375;
             padding: 30px;
             margin: 25px;
             white-space: nowrap;
             height: auto;
-            width: 80%;
+            width:80%;
+			margin: 0 auto;
+			font-size: 30px;
+			color: white;
+			text-align:center;
+			alt: formatting the content within the add course page so that it adjust accordingly.;
           }
-          .course-container {
-            padding: 5px;
-            float: left;
-            clear: left;
-            display: inline-block;
-            background: #4b5143;
-            white-space: nowrap;
-            width: 100%;
-            height: auto;
-          }
-          .submit {
-            height: 50px;
-            width: 150px;
-            float:right;
-          }
+          #back_button {
+		    float:left;
+		    alt:Submit;
+		    height: 90px;
+		    width:200px;
+		    alt: The back button will return the user to the login page.;
+	      }
+	      #logout_button {
+		    float:right;
+		    alt:Submit;
+		    height:50px;
+		    width:200px;
+		    alt: The logout button will navigate the user back to the login page.;
+	      }
+	      #home_button {
+		    height:90px;
+		    width:200px;
+		    alt: The home button will be displayed, but will not do anything because the user is already in the home page;
+	      }
+	      #help_button {
+		    alt:Submit;
+		    height:45px;
+		    width:200px;
+		    alt: The help button will navigate the user to the help page which will explain what things do in the page;
+	      }
+	      .save_button{
+        	height: 50px;
+	    	width: 200px;
+			color: white;
+			background-color:#384130;
+			font-size:30px;
+			alt: The save button will create and add the new course to the user home page (course page).;
+    	}
+    	form p {
+        	font-size: 30px;
+        }
+	      @media only screen and (max-width: 768px) {
+            /* For mobile phones: */
+            h1 {
+          		display: none;
+        	}
+	        #back_button {
+	            height: 45px;
+			    width: 100px;
+			    alt: The back button has been re-sized for the mobile version
+		    }
+		    #help_button {
+			    height: 30px;
+			    width: 100px;
+			    alt: The help button has been re-sized for the mobile version
+		    }
+		    #logout_button {
+		        float:right;
+		        alt:Submit;
+		        height:25px;
+		        width:100px;
+		        alt: formatted the logout button for the mobile version.;
+		    }
+		    #home_button {
+		        alt:Submit;
+		        height:45px;
+		        width:100px;
+		        alt: formatted the home button for the mobile version.;
+		    }
+		    .container {
+		        width: 80%;
+		        alt: formatted the content of the add new course for the mobile version.;
+		    }
+		    form p {
+        	font-size: 20px;
+        	alt: formatted te text within the form for the mobile version.;
+        }
+		    .save_button {
+		        height: 25px;
+		        width: 75px;
+		        font-size:15px;
+		        alt: formatted the save button for the mobile version.;
+			}
+	      }
         </style>
     </head>
 
     <body bgcolor="#384130">
 
+        <!-- Setting up the back button -->
   		<div class="top">
   			{% load static %}
-  			<input class="back_button" type="image" src="{% static 'posts/back_button.png' %}" style="float:left" alt="Submit" height="90" width="200" alt="Brings you back to the previous page" onclick="/CHproto/profile/">
+            <a href="/CHproto/profile"><input id="back_button" type="image" src="{% static 'posts/back_button.png' %}"></a>
 
   		</div>
-
+        <!-- Setting up the logout button -->
   		<div class="logout">
   			{% load static %}
-  			<a href="/CHproto/logout"><input type="image" src="{% static 'posts/logout.jpg' %}" style="float:right" alt="Submit" height="50" width="200" alt="The user will logout and be brought back to login page"></a>
+  			<a href="/CHproto/logout"><input id="logout_button" type="image" src="{% static 'posts/logout.jpg' %}"></a>
   		</div>
 
+        <!-- Setting up the home button -->
   		<div class="home">
   			{% load static %}
-  			<center><input type="image" src="{% static 'posts/home_button.png' %}" alt="Submit" height="90" width="" alt="Return back to the course page (home page)"></center>
+  			<center><input id="home_button" type="image" src="{% static 'posts/home_button.png' %}"></center>
   		</div>
 
     <body>
@@ -84,17 +145,19 @@
               <h1>Add New Course</h1>
         </div>
 
-        <div class="content container">
+        <center><div class="content container">
 
             <div class="row">
-                <div class="col-md-8">
+                <div>
                      {% block content %}
-
+                    <!-- Display the form within the page which will ask the user to enter the name of the course,
+                    hours per meeting and hours per week meeting. Once that is filled in, press save to add new course
+                    -->
                     <form method="POST" class="post-form">{% csrf_token %}
                      {{ form.as_p }}
 
                      <input type="hidden" name="next" value="{{ request.path }}">
-                    <button type="submit" class="save button">Save</button>
+                    <button type="submit" class="save_button">Save</button>
 
                   </form>
 
@@ -102,11 +165,11 @@
 
                 </div>
             </div>
-        </div>
-
+        </div></center>
         <div>
+           <!-- Setting up the help button -->
           {% load static %}
-          <input type="image" src="{% static 'posts/help_button.png' %}" alt="Submit" height="45" width="200" alt="Brings you to the help page related to the edit student">
+          <input id="help_button" type="image" src="{% static 'posts/help_button.png' %}">
         </div>
     </body>
 </html>
