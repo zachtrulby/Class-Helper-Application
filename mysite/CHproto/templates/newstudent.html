@@ -115,7 +115,7 @@
         <!-- Setting up the back button -->
   		<div class="top">
   			{% load static %}
-            <a href="/CHproto/9/roster/"><input id="back_button" type="image" src="{% static 'posts/back_button.png' %}"></a>
+            <input id="back_button" type="image" onclick="window.history.back()" src="{% static 'posts/back_button.png' %}">
 
   		</div>
         <!-- Setting up the logout button -->
@@ -133,7 +133,7 @@
         <div class="page-header">
               <h1>Add student to {{course.name}}</h1>
         </div>
-        <!-- Display the content on the page, it's the form that asks about entering the student information -->
+
         <center><div class="content container">
 
             <div class="row">
