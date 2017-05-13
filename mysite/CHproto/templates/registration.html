@@ -1,117 +1,149 @@
+<!-- The purpose of the page is to register a new account for an user. The user will have to enter a username and
+     a password. The username will be required to have 150 or less characters used. The characters contains, letters
+     , digits and characters such as @, punctuation, plus, minus and underscore. If the character is neither of those,
+     the user will be given an error message asking to enter only valid characters for the username. The password
+      cannot be similar to username, cannot use common words (hello, welcome etc), must be at least 8 characters
+      long and cannot be entirely numerical. To make sure that the user entered the right password, he/she will be
+      required to confirm the password. Once all things go well, the user will successfully create an account and be
+      brought back to the login page to login with the new credentials
+-->
 <!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="utf-8" />
-  <title>PROTOTYPE</title>
+  <title>Registration</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link rel="icon" href="#">
+  <!-- Everything inside the block style is CSS (Cascading Style Sheets), which is is computer language responsible
+	   for formatting the language. -->
+  <!-- To find out where the formatting is done, search for the class or id within the tags (class = .)(id = #) -->
   <style type="text/css">
-    h1 {
-      font-family: "Copperplate Gothic Light";
-	    font-size: 46px;
-	    font-style: normal;
-	    font-variant: normal;
-	    font-weight: 1250;
-	    line-height: 36.4px;
-      color: white;
-      text-align: center;
-      /*text-transform: uppercase; */
-    }
-    h2 {
-      font-family: "Copperplate Gothic Light";
-	    font-size: 30px;
-	    font-style: normal;
-	    font-variant: normal;
-	    font-weight: 1250;
-	    line-height: 36.4px;
-      color: white;
-      text-align: center;
-      /*text-transform: uppercase; */
-    }
-    hr {
-      display: block;
-      height: 2px;
-      border: 0;
-      border-top: 2px solid #fff;
-      margin: 1em 0;
-      padding: 0;
-      width: 25% auto;
 
+    html, body {
+		height:50%;
+		width:100%;
+		alt: The page formatting will be adjusting accordingly depending what display the browser is using;
+	}
+	#back_button {
+		float:left;
+		alt:Submit;
+		height: 90px;
+		width:200px;
+		alt: The back button will return the user to the login page.;
+	}
+	#help_button {
+		alt:Submit;
+		height:45px;
+		width:200px;
+		alt: The help button will navigate the user to the help page which will explain what things do in the page;
+	}
+    h1 {
+        font-family: "Copperplate Gothic Light";
+	    font-size: 46px;
+        font-style: normal;
+	    font-variant: normal;
+	    font-weight: 1250;
+	    line-height: 36.4px;
+        color: white;
+        /*text-transform: uppercase; */
+        alt: The page will display "REGISTRATION" as the title of the page.;
     }
     .container {
-      float: none;
-      clear: left;
-      display: block;
-      background: #869375;
-      padding: 30px;
-      margin: 25px;
-      white-space: nowrap;
-      height: auto;
-      width: auto;
-    }
-    .course-container {
-      padding: 5px;
-      float: left;
-      clear: left;
-      display: inline-block;
-      background: #4b5143;
-      white-space: nowrap;
-      width: 100%;
-      height: auto;
-    }
-    #add_course_button {
-      padding: 5px;
-      display: inline-block;
-    }
-    .form-container {
-      align-content: center;
-    }
-    ul {
-      font-family: "Copperplate Gothic Light";
-	    font-size: 20px;
-	    font-style: normal;
-	    font-variant: normal;
-	    font-weight: 1250;
-      color: white;
-      text-align: center;
+        float: none;
+        clear: left;
+        display: block;
+        background: #869375;
+        padding: 30px;
+        margin: 25px;
+        white-space: nowrap;
+        height: auto;
+        width: auto;
+        alt: Basically all the content from the page will be formatted to a specific location.
+			 The page should adjust accordingly.;
     }
     .register {
-      height: 50px;
-      width: 200px;
+        height: 50px;
+	    width: 200px;
+		color: black;
+		background-color:#889277;
+		font-size:30px;
+		alt: Once all the information have been filled correctly, the user will press register to create new account.
+		     If the information hasn't been entered correctly, the user will receive error.;
     }
+    form ul{
+        color: white;
+        font-size: 25px;
+        alt: The unordered list will display all the requirements that are needed to have a valid password.;
+     }
+     form p {
+        font-size: 30px;
+        alt: The standard text will have specific size for desktop version.;
+     }
+
+     @media only screen and (max-width: 768px) {
+        /* For mobile phones: */
+	    #back_button {
+	        height: 45px;
+			width: 100px;
+			alt: The back button has been re-sized for the mobile version
+		}
+		#help_button {
+			height: 30px;
+			width: 100px;
+			alt: The help button has been re-sized for the mobile version
+		}
+		h1 {
+		    font-size: 30px;
+		    alt: The page title has been re-sized for the mobile version
+		}
+		.register {
+		    height: 25px;
+		    width: 100px;
+		    font-size:15px;
+		    alt: The register button has been re-sized for the mobile version
+		}
+		form ul{
+		    font-size: 15px;
+		    alt: The unordered list that contains the specifications of a password has been re-sized for mobile version
+		}
+		form p {
+            font-size: 15px;
+            alt: the standard text has been re-sized for the mobile version
+        }
+	 }
   </style>
   <script src="https://code.jquery.com/jquery-1.10.2.js"></script>
 </head>
 <body bgcolor="#384130">
 
+<!-- Setting up the back button -->
   <div class="top">
     {% load static %}
-    <input type="image" onclick="window.history.back()" src="{% static 'posts/back_button.png' %}" alt="Brings
-    the user to previous page" style="float: left" height="90" width="200">
+    <a href="/CHproto/profile"><input id="back_button" type="image" src="{% static 'posts/back_button.png' %}" alt="Brings
+      the user to previous page"></a>
   </div>
 
-  <br>
-
+<!-- Setting up the main content of the registration page. To know more about the functionality, please read the
+     purpose of it which is located on top of the page -->
   <div class="container">
     <h1>Registration</h1>
-    <div class="form-container">
       <form method="post">
         {% csrf_token %}
 
         {{form.as_p}}
 
-        <input type="submit" value="register">
+<!-- Once the username and password inputs are accepted, the user will click register to successfully create an
+     account. The user will be moved back to the login page -->
+        <input class="register" type="submit" value="register">
 
       </form>
-
-    </div>
   </div>
 
+<!-- Setting up the help button -->
   <div>
     <form action='posts.html'>
     {% load static %}
-    <input type="image" src="{% static 'posts/help_button.png' %}" alt="Submit"
-    height="45" width="200">
+    <input id="help_button" type="image" src="{% static 'posts/help_button.png' %}" alt="Submit">
     </form>
   </div>
 

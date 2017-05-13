@@ -1,16 +1,48 @@
+<!-- In the roster page, the user has the ability look at the current roster or add students to the
+     corresponding course. The roster will display the student last name, first name, student ID, year of graduation,
+     major and email. Once the student is added successfully, the user will be able to add add attendance to the
+     student, edit the student information or even removing the student.
+-->
 <!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="utf-8" />
-  <title>PROTOTYPE</title>
+  <title>Roster</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link rel="icon" href="#">
   <script src="https://code.jquery.com/jquery-1.10.2.js"></script>
+  <!-- Everything inside the block style is CSS (Cascading Style Sheets), which is is computer language responsible
+	   for formatting the language. -->
+  <!-- To find out where the formatting is done, search for the class or id within the tags (class = .)(id = #) -->
   <style type="text/css">
-
+    #back_button {
+	  float:left;
+	  alt:Submit;
+	  height: 90px;
+	  width:200px;
+	  alt: the back button will return the user back to the home page (Course page).;
+	}
+	#home_button {
+	  alt:Submit;
+	  height:90px;
+	  width:200px;
+	  alt: The home button will return the user back to the home page (Course page).;
+	}
+	#logout_button {
+	  float:right;
+	  height:50px;
+	  width:200px;
+	  alt: The logout button will return the user back to the login page.;
+	}
+	#help_button {
+	  height: 45px;
+	  width: 200px;
+	  alt: The help button will navigate the user to the help page which will explain what things do in the page;
+	}
     table {
       border: 3px solid black;
       border-collapse: collapse;
+      alt: Adjusting how the table will display the roster content.;
     }
     th, td {
       border: 1px solid black;
@@ -19,38 +51,19 @@
       text-align: center;
       border-collapse: collapse;
       padding: 7.1px;
+      alt: Adjusting the table display even deeper (text, positioning, border color etc.);
     }
     h1 {
       font-family: "Copperplate Gothic Light";
-      font-size: 46px;
+      font-size: 30px;
       font-style: normal;
       font-variant: normal;
       font-weight: 1250;
       line-height: 36.4px;
       color: white;
       text-align: center;
+      alt: formatting the title "COURSE ROSTER FOR [INSERT COURSE NAME HERE]"
       /*text-transform: uppercase; */
-    }
-    h2 {
-      font-family: "Copperplate Gothic Light";
-      font-size: 24px;
-      font-style: normal;
-      font-variant: normal;
-      font-weight: 1150;
-      line-height: 24px;
-      color: white;
-      text-align: left;
-      /*text-transform: uppercase; */
-    }
-    hr {
-      display: block;
-      height: 2px;
-      border: 0;
-      border-top: 2px solid #fff;
-      margin: 1em 0;
-      padding: 0;
-      width: 25% auto;
-
     }
     .container {
       float: none;
@@ -62,68 +75,96 @@
       white-space: nowrap;
       height: auto;
       width: auto;
+      alt: formatting the content of the roster page to display accordingly.;
     }
-    .course-container {
-      padding: 5px;
-      float: left;
-      clear: left;
-      display: inline-block;
-      background: #4b5143;
-      white-space: nowrap;
-      width: 100%;
-      height: auto;
-    }
-    #add_course_button {
-      padding: 5px;
-      display: inline-block;
-    }
-    .form-container {
-      align-content: center;
-    }
-    ul {
-      font-family: "Copperplate Gothic Light";
-      font-size: 20px;
-      font-style: normal;
-      font-variant: normal;
-      font-weight: 1250;
-      color: white;
-      text-align: center;
-    }
-    .register {
+    .add_new_student_button {
       height: 50px;
-      width: 200px;
-    }
+	  width: 325px;
+	  color: white;
+	  background-color:#384130;
+	  font-size:30px;
+	}
+	.attendance_button {
+      height: 50px;
+	  width: 250px;
+	  color: white;
+	  background-color:#384130;
+	  font-size:30px;
+	}
+    @media only screen and (max-width: 768px) {
+        /* For mobile phones: */
+        h1 {
+          display: none;
+          alt: Formatted the title text for the mobile version.;
+        }
+	    #help_button {
+		  height: 30px;
+		  width: 100px;
+		  alt: Formatted the help button for the mobile version.;
+		}
+		#back_button {
+		  height: 45px;
+		  width: 100px;
+		  alt: Formatted the back button for the mobile version.;
+		}
+		#logout_button {
+		  float:right;
+		  height:25px;
+		  width:100px;
+		  alt: Formatted the logout button for the mobile version.;
+		}
+		#home_button {
+		  height:45px;
+		  width:100px;
+		  alt: Formatted the home button for the mobile version.;
+		}
+		.add_new_student_button {
+		  height: 25px;
+		  width: 175px;
+		  font-size:15px;
+		  alt: Formatted the add new student button for the mobile version.;
+		}
+		.attendance_button {
+		  height: 25px;
+		  width: 175px;
+		  font-size:15px;
+		  alt: Formatted the add new student button for the mobile version.;
+		}
+  }
   </style>
 </head>
 
 <body bgcolor="#384130">
 
+<!-- Setting up the back button -->
 <div class="back">
 {% load static %}
-<a href="/CHproto/profile"><input type="image" src="{% static 'posts/back_button.png' %}" alt="Brings
-the user to previous page" style="float: left" height="90" width="200"></a>
+<a href="/CHproto/profile"><input id="back_button" type="image" src="{% static 'posts/back_button.png' %}" alt="Brings
+the user to previous page"></a>
 </div>
 
+<!-- Setting up the logout button -->
 <div class="logout">
 {% load static %}
-<center><a><input type="image" src="{% static 'posts/logout.jpg' %}" alt=
-  "Logs the user out" style="float: right" height="70" width=
-  "160"></a></center>
+<center><a href="/CHproto/logout">><input id="logout_button" type="image" src="{% static 'posts/logout.jpg' %}"></a></center>
 </div>
 
+<!-- Setting up the home button -->
 <div class="home">
   {% load static %}
-  <center><a href = "/CHproto/profile"><input type="image" src="{% static 'posts/home_button.png' %}"
-    alt="Brings the user to the homepage" stlyle="float: right"
-    height="100" width="120"/></a></center>
+  <center><a href = "/CHproto/profile"><input id="home_button" type="image" src="{% static 'posts/home_button.png' %}"
+    alt="Brings the user to the homepage"/></a></center>
 </div>
 
 <div class="container">
 
 <h1>Course roster for {{ course.name }}</h1>
 
+  <!-- Every time a new student is added, the roster page will generate a table row for that student -->
+  <!-- The table will display the student information as well as the option to add attendance, edit student,
+       remove student, check student attendance by week and attendance by month -->
 {% if students %}
-    <table>
+    <center><table>
       <tr>
         <th>Last Name</th>
         <th>First Name</th>
@@ -148,23 +189,21 @@ the user to previous page" style="float: left" height="90" width="200"></a>
 
         <td><a href="/CHproto/{{student.id}}/{{course.id}}/editstudent/"><button class="editbtn">edit {{student.first_name}}</button></a></td>
         <td><a href="/CHproto/{{student.id}}/{{course.id}}/removefromroster"><button class="removebtn">remove {{student.first_name}}</button></a></td>
-        <td><a href="/CHproto/{{course.id}}/{{month_number}}/graphattendancebymonth"><button class="graphbtn">graph by week {{roster_entries}} {{month_number}} {{week_number}}</button></a></td>
-        <td><a href="/CHproto/{{course.id}}/{{month_number}}/graphattendancebymonth"><button class="graphbtn">graph by month {{roster_entries}} {{month_number}}</button></a></td>
       </tr>
     {% endfor %}
-    </table>
+    </table></center>
   {% endif %}
 
-<a href="newstudent/"><input type="submit" value="ADD NEW STUDENT"></input></a>
-<a href="/CHproto/{{ course.id }}/attendance/"><input type="submit" value="ATTENDANCE"></input></a>
+<!-- Setting up the adding new student button -->
+<center><a href="newstudent/"><input class="add_new_student_button" type="submit" value="ADD NEW STUDENT"></input></a></center>
+<center><a href="/CHproto/{{ course.id }}/attendance/"><input class="attendance_button" type="submit" value="ATTENDANCE"></input></a></center>
 
 </div>
-
+<!-- Display the help button -->
 <div>
 <form action='posts.html'>
 {% load static %}
-<input type="image" src="{% static 'posts/help_button.png' %}" alt="Submit"
-height="45" width="200">
+<input id="help_button" type="image" src="{% static 'posts/help_button.png' %}" alt="Submit">
 </form>
 </div>
 
