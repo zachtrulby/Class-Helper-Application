@@ -1,89 +1,144 @@
+<!-- This page extends to the base.html which means that some of the formatting setup there will be able to be used
+     within this page as well -->
+
+<!-- The purpose of the page is to have the user either login to access their home page (Course page) or register a new
+     account. The page should give an error message if the user entered the incorrect credentials. Once the credentials
+     are correct, the user will be navigated to the home page (Course page). If the user already created an account,
+     but forgot their password, the user could request their forgotten password by entering their email.
+-->
+{% extends "../base.html" %}
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="utf-8" />
-  <title>Class Helper - Login</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <link rel="icon" href="#">
-  <style type="text/css">
-    h1 {
-      font-family: "Copperplate Gothic Light";
-	    font-size: 80px;
-	    font-style: normal;
-	    font-variant: normal;
-	    font-weight: 1250;
-	    line-height: 36.4px;
-      color: white;
-      text-align: center;
-      /*text-transform: uppercase; */
-    }
-    h2 {
-      font-family: "Copperplate Gothic Light";
-	    font-size: 30px;
-	    font-style: normal;
-	    font-variant: normal;
-	    font-weight: 1250;
-	    line-height: 36.4px;
-      color: white;
-      text-align: center;
-      /*text-transform: uppercase; */
-    }
-    hr {
-      display: block;
-      height: 2px;
-      border: 0;
-      border-top: 2px solid #fff;
-      margin: 1em 0;
-      padding: 0;
-      width: 25% auto;
+    <meta charset="UTF-8">
+    <title>Login</title>
+    <!-- Everything inside the block style is CSS (Cascading Style Sheets), which is is computer language responsible
+	     for formatting the language. -->
+	<!-- This page extends to the base.html page which has some formatting that will be used for all pages as
+	     default.-->
+	<!-- To find out where the formatting is done, search for the class or id within the tags (class = .)(id = #) -->
+	<style type="text/css">
 
-    }
+	{% block style %}
+	    desktop_documentation {
+	        alt: The formatting of the desktop version is below.
+	    }
+		h1 {
+			text-align:center;
+			font-size:60px;
+			color: white;
+			alt: This will display the "Class Helper Login" text in a title size;
+		}
+		#middle {
+			width:80%;
+			margin: 0 auto;
+			font-size: 30px;
+			color: white;
+			text-align:center;
+			alt: Basically all the content from the page will be formatted to a specific location.
+			     The page should adjust accordingly.;
+		}
+		#middle input {
+			color: black;
+			alt: The user input will be displayed in black color;
+		}
+		.login, .register {
+			height: 50px;
+			width: 200px;
+			color: black;
+			background-color:#889277;
+			font-size:30px;
+			alt: Formatting the login and register button.
+		}
+		#back_button {
+			display:none;
+			alt: The back button has been placed, but will be invisible because the login page does not need it;
 
-    .form-container {
-      align-content: center;
-    }
-    ul {
-      font-family: "Copperplate Gothic Light";
-	    font-size: 20px;
-	    font-style: normal;
-	    font-variant: normal;
-	    font-weight: 1250;
-      color: white;
-      text-align: center;
-    }
-    .register {
-      height: 50px;
-      width: 200px;
-    }
-  </style>
-  <script src="https://code.jquery.com/jquery-1.10.2.js"></script>
+		}
+		#logout_button {
+			display:none;
+			alt: The logout button has been placed, but will be invisible because the login page does not need it;
+		}
+		#home_button {
+			display:none;
+			alt: The home button, which brings you to the course page, will be invisible because the login page does
+			not need it;
+		}
+		#help_button {
+			height:45px;
+			width:200px;
+			alt: The help button will navigate the user to the help page which will explain what things do in the page;
+		}
+		.lost_password {
+		    color: white;
+		    alt: The lost password link will navigate you to the lost password page which will ask the user to enter
+		         their email. If the email is correct, the user will receive their forgotten password.;
+		 }
+		 .message_fail {
+		    color: red;
+		    alt: If the user enters the wrong credentials in the login page, the user will receive a message in red
+		         indicating that the login credentials are incorrect.
+		 }
+
+		@media only screen and (max-width: 768px) {
+		    /* For mobile phones: */
+		    .mobile_documentation {
+		        alt: The formatting for the mobile version is setup below. Once the screen gets to mobile size, the mobile
+                     formatting will be initialized
+            }
+		    h1 {
+		        font-size: 30px;
+		        alt: This will display the "Class Helper Login" text in a title size (mobile version);
+		    }
+		    .message_fail, .message_pass {
+		        font-size: 15px;
+		        alt: The "incorrect credentials error message" and "Please login message" will be displayed in mobile
+		             size;
+		    }
+		    .login, .register {
+		        height: 25px;
+		        width: 100px;
+		        font-size:15px;
+		        alt: The login button is responsible to bring the user to the home page (course page). The register page
+		             is responsible for bringing the user to the registration page. Both the desktop and mobile have
+		             their own formatting setup.;
+		    }
+		    .lost_password {
+		        font-size: 20px;
+		        alt: The lost password link will navigate you to the lost password page which will ask the user to enter
+		             their email. If the email is correct, the user will receive their forgotten password
+		             (mobile version);
+		    }
+		}
+	{% endblock %}
+	</style>
 </head>
-<body bgcolor="#384130">
+<body>
+{% block body %}
+<h1>Class Helper Login</h1>
+<div id="middle">
 
-
-  <div class="container">
-    <h1>Class Helper Login</h1>
-  <div class="form-container">
-
-{% block content %}
-
+<!-- If the login credentials are incorrect, display error message to user -->
 {% if form.errors %}
-<p>Your username and password didn't match. Please try again.</p>
+<p class="message">Your username and password didn't match. Please try again.</p>
 {% endif %}
 
+<!-- if user is not allowed to login, display error message that user -->
 {% if next %}
     {% if user.is_authenticated %}
-    <p>Your account doesn't have access to this page. To proceed,
+    <p class="message_fail">Your account doesn't have access to this page. To proceed,
     please login with an account that has access.</p>
     {% else %}
-    <p>Please login to see this page.</p>
+    <!-- When going to the login page, the user will be asked to enter their credentials -->
+    <p class="message_pass">Please login to see the home page.</p>
     {% endif %}
 {% endif %}
 
-
+<!-- The form is required to allow the user to enter their username and password. After the user entered their
+     credentials, the user will press login to navigate to the home page (course page) -->
 <form method="post" action="{% url 'login' %}">
 {% csrf_token %}
-<table>
+<center><table>
 <tr>
     <td>{{ form.username.label_tag }}</td>
     <td>{{ form.username }}</td>
@@ -92,31 +147,21 @@
     <td>{{ form.password.label_tag }}</td>
     <td>{{ form.password }}</td>
 </tr>
-</table>
-
-<input type="submit" value="login" />
+</table></center>
+<br>
+<input class="login" type="submit" value="login" />
 <input type="hidden" name="next" value="{{ next }}" />
 </form>
 
+<br>
 
+<!-- Clicking the register button will navigate the user to the registration page -->
+<a href="/CHproto/register"><input class="register" type="submit" value="register"></a>
 
-<a href="/CHproto/register"><input type="submit" value="register"></a>
-
+<!-- Clicking the lost password will bring you to the lost password page which will ask the user to enter their email.
+     The email will return the user their forgotten password -->
 {# Assumes you setup the password_reset view in your URLconf #}
-<p><a href="{% url 'password_reset' %}">Lost password?</a></p>
-
+<p><a class="lost_password" href="{% url 'password_reset' %}">Lost password?</a></p>
 {% endblock %}
-
-    </div>
-  </div>
-
-  <div>
-    <form action='posts.html'>
-    {% load static %}
-    <input type="image" src="{% static 'posts/help_button.png' %}" alt="Help"
-    height="45" width="200">
-    </form>
-  </div>
-
 </body>
 </html>
