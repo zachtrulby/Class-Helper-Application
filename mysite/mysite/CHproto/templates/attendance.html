@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="https://code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.css">
+<script src="https://code.jquery.com/jquery-1.11.3.min.js"></script>
+<script src="https://code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.js"></script>
+<style type="text/css">
+	h1 {
+		background-color: #889277;
+		color: white;
+	}
+	table {
+		width: 80%;
+	}
+	table th {
+		border: 2px solid black;
+		text-align:center;
+		background-color: #889277;
+		color: white;
+	}
+	table td {
+		border: 2px solid black;
+	}
+</style>
+</head>
+<body style="background-color:#384130">
+<div data-role="page" id="pageone">
+  <div data-role="header">
+    <h1>Attendance</h1>
+  </div>
+  <div data-role="main" class="ui-content">
+    <table data-role="table" data-mode="columntoggle" class="ui-responsive" id="myTable">
+
+      <thead>
+        <tr>
+          <th>Student Name</th>
+          <th colspan="{{month}}" data-priority="2">Month 1</th>
+          <th colspan="{{month}}" data-priority="3">Month 2</th>
+          <th colspan="{{month}}" data-priority="4">Month 3</th>
+          <th colspan="{{month}}" data-priority="5">Month 4</th>
+        </tr>
+      </thead>
+      <tbody>
+				{% for student, attendances in attendances %}
+					<tr>
+						<td> {{ student.last_name }}, {{ student.first_name }}</td>
+						{% for attendance in attendances %}
+							{% if attendance.month_number == 1%}
+								<td>{{ attendance.date }}: {{ attendance.attendance_mark }}</td>
+
+							{% endif %}
+						{% endfor %}
+<!--
+							<td> </td>
+		          <td>Week 2</td>
+		          <td>Week 3</td>
+		          <td>Week 4</td>
+
+				  		<td>Week 5</td>
+		          <td>Week 6</td>
+		          <td>Week 7</td>
+		          <td>Week 8</td>
+
+				  		<td>Week 9</td>
+		          <td>Week 10</td>
+		          <td>Week 11</td>
+		          <td>Week 12</td>
+
+				  		<td>Week 13</td>
+		          <td>Week 14</td>
+		          <td>Week 15</td>
+		          <td>Week 16</td>
+
+-->
+						</td>
+					</tr>
+				{% endfor %}
+
+      </tbody>
+    </table>
+  </div>
+</div>
+</body>
+</html>
